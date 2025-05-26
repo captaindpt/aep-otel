@@ -41,4 +41,14 @@ OPEN QUESTIONS: Acceptable to store PNG in repo?
 TASK: Make a `feat:` commit, merge `release-please` PR, and trigger first PyPI publish
 ETA: <15 min
 DEPENDENCIES: PyPI trusted publishing configured, `release-please.yml`, `pypi-publish.yml`
-OPEN QUESTIONS: Confirm PyPI project created successfully after first publish 
+OPEN QUESTIONS: Confirm PyPI project created successfully after first publish
+
+TASK: Test `semantic-release` setup and trigger first release
+ETA: 1 hr
+DEPENDENCIES: `semantic-release.yml` workflow, `.releaserc.json`, `package.json` & `package-lock.json` (or `yarn.lock`) committed, `GH_PAT_FOR_SEMANTIC_RELEASE` secret configured
+OPEN QUESTIONS: Confirm `pyproject.toml` version bumping strategy (currently manual/placeholder, requires `@semantic-release/exec` for full automation with Poetry)
+
+TASK: Implement automatic `pyproject.toml` version bumping with `semantic-release`
+ETA: 1.5 hrs
+DEPENDENCIES: Working `semantic-release` setup, Poetry installed in CI environment
+OPEN QUESTIONS: Best way to integrate `poetry version ${nextRelease.version}` into the `semantic-release` lifecycle? (`@semantic-release/exec` likely candidate) 

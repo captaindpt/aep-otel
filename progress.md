@@ -37,4 +37,12 @@
 – 2025-05-26 05:00  
 – WHAT: Configured PyPI Trusted Publishing for the `aep-otel` package.  
 – DETAILS: Successfully set up the trusted publisher on PyPI, linking to the GitHub Actions workflow (`pypi-publish.yml`) for automated publishing. This prepares the project for its first release.  
-– RESOURCES: `pypi-publish.yml`, PyPI project settings for `aep-otel`. 
+– RESOURCES: `pypi-publish.yml`, PyPI project settings for `aep-otel`.  
+– 2025-05-26 05:15  
+– WHAT: Replaced `release-please` with `semantic-release` for release automation.
+– DETAILS: Removed `release-please` configurations. Added `package.json` for Node.js tooling. Configured `semantic-release` via `.releaserc.json` to manage changelogs, Git commits/tags, and GitHub Releases. Created a new GitHub Actions workflow (`semantic-release.yml`) to execute `semantic-release`. PyPI publishing workflow (`pypi-publish.yml`) will be triggered by tags created by `semantic-release`.
+– RESOURCES: `package.json`, `.releaserc.json`, `.github/workflows/semantic-release.yml`, `python/CHANGELOG.md` (to be managed by semantic-release).  
+– 2025-05-26 05:20  
+– WHAT: Successfully published `aep-otel` v1.0.0 to PyPI using `semantic-release`.
+– DETAILS: The `semantic-release` workflow correctly identified a new version based on commit messages, created a GitHub Release and tag (`aep-otel@v1.0.0`), updated `python/CHANGELOG.md`, and committed these changes. The `pypi-publish.yml` workflow then successfully built and published the tagged version to PyPI. The `pyproject.toml` version was likely not updated automatically in this first pass.
+– RESOURCES: [PyPI Link (https://pypi.org/project/aep-otel/)](https://pypi.org/project/aep-otel/), GitHub Actions runs for `semantic-release.yml` and `pypi-publish.yml`, `python/CHANGELOG.md` 

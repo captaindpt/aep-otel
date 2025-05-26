@@ -133,4 +133,4 @@ Contributions are welcome! Please see `CONTRIBUTING.md` (TODO: create this file)
 
 ---
 
-© 2025 Mani R. Shahmadi — MIT Licence 
+© 2025 Mani Rash Ahmadi — MIT Licence 

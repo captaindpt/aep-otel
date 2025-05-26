@@ -9,8 +9,7 @@
     ["@semantic-release/exec", {
       "prepareCmd": "cd python && poetry version ${nextRelease.version} && cd ..",
       "publishCmd": false,
-      "verifyConditionsCmd": "poetry --version",
-      "verifyReleaseCmd": false
+      "verifyConditionsCmd": "poetry --version"
     }],
     ["@semantic-release/git", {
       "assets": ["python/CHANGELOG.md", "python/pyproject.toml", "python/poetry.lock"],
