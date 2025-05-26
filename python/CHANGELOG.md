@@ -1,3 +1,10 @@
+## [1.1.4](https://github.com/captaindpt/aep-otel/compare/aep-otel@v1.1.3...aep-otel@v1.1.4) (2025-05-26)
+
+
+### Bug Fixes
+
+* **collector:** correct tempo configuration ([3631114](https://github.com/captaindpt/aep-otel/commit/3631114592266f2e707146fda3ab8eac6e41fdbe))
+
 ## [1.1.3](https://github.com/captaindpt/aep-otel/compare/aep-otel@v1.1.2...aep-otel@v1.1.3) (2025-05-26)
 
 
