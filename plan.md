@@ -36,4 +36,9 @@ OPEN QUESTIONS: Package name `aep-otel` ok?
 TASK: capture demo trace screenshot and embed in README
 ETA: 15 min
 DEPENDENCIES: wrapper impl, collector config
-OPEN QUESTIONS: Acceptable to store PNG in repo? 
+OPEN QUESTIONS: Acceptable to store PNG in repo?
+
+TASK: Make a `feat:` commit, merge `release-please` PR, and trigger first PyPI publish
+ETA: <15 min
+DEPENDENCIES: PyPI trusted publishing configured, `release-please.yml`, `pypi-publish.yml`
+OPEN QUESTIONS: Confirm PyPI project created successfully after first publish 

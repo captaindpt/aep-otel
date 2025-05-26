@@ -1,3 +1,3 @@
-TASK IN PROGRESS: P-1 Prototype phase complete. Reviewing P-2 deliverables.
-BLOCKERS / NOTES: Jaeger screenshot captured and embedded in README.md. Local dev loop for Python SDK is functional.
-NEXT SMALL STEP: Prepare for P-2: "PyPI `0.1.0a` + Grafana dashboard gif". Next action is to ensure PyPI release automation is fully set up by user (trusted publishing) and trigger first release. Then, work on Grafana dashboard. 
+TASK IN PROGRESS: Trigger first PyPI release for `aep-otel` Python SDK.
+BLOCKERS / NOTES: User needs to make a `feat:` commit and push to `main` branch.
+NEXT SMALL STEP: User to make the commit and push, then monitor GitHub Actions for `release-please` PR and subsequent `pypi-publish` workflow. 

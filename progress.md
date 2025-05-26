@@ -33,4 +33,8 @@
 – 2025-05-26 03:15  
 – WHAT: Successfully troubleshooted and confirmed end-to-end local trace pipeline for Python SDK. User provided Jaeger screenshot, which was embedded into `README.md`.  
 – DETAILS: Resolved `ModuleNotFoundError` by clarifying `poetry install` usage. Resolved OTLP exporter `ConnectionRefusedError` by fixing OTEL Collector config (`jaeger` exporter type changed to `otlp` targeting `jaeger:4317`). Resolved OTLP exporter `404` by explicitly setting `/v1/traces` path in Python exporter. End-to-end flow: Python script -> OTEL Collector -> Jaeger is now working.  
-– RESOURCES: `README.md`, `docs/assets/images/jaeger_trace_python_openai_example.png` (user provided/added), `examples/collector/otel-collector-config.yaml`, `python/aep_otel/tracing.py`, `examples/python/minimal_openai.py` 
+– RESOURCES: `README.md`, `docs/assets/images/jaeger_trace_python_openai_example.png` (user provided/added), `examples/collector/otel-collector-config.yaml`, `python/aep_otel/tracing.py`, `examples/python/minimal_openai.py`  
+– 2025-05-26 05:00  
+– WHAT: Configured PyPI Trusted Publishing for the `aep-otel` package.  
+– DETAILS: Successfully set up the trusted publisher on PyPI, linking to the GitHub Actions workflow (`pypi-publish.yml`) for automated publishing. This prepares the project for its first release.  
+– RESOURCES: `pypi-publish.yml`, PyPI project settings for `aep-otel`. 
