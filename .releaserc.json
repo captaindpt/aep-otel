@@ -6,8 +6,14 @@
     ["@semantic-release/changelog", {
       "changelogFile": "python/CHANGELOG.md"
     }],
+    ["@semantic-release/exec", {
+      "prepareCmd": "cd python && poetry version ${nextRelease.version} && cd ..",
+      "publishCmd": false,
+      "verifyConditionsCmd": "poetry --version",
+      "verifyReleaseCmd": false
+    }],
     ["@semantic-release/git", {
-      "assets": ["python/CHANGELOG.md", "python/pyproject.toml"],
+      "assets": ["python/CHANGELOG.md", "python/pyproject.toml", "python/poetry.lock"],
       "message": "chore(release): ${nextRelease.version} [skip ci]\n\n${nextRelease.notes}"
     }],
     ["@semantic-release/github", {
