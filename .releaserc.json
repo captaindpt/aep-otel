@@ -8,7 +8,6 @@
     }],
     ["@semantic-release/exec", {
       "prepareCmd": "cd python && poetry version ${nextRelease.version} && cd ..",
-      "publishCmd": false,
       "verifyConditionsCmd": "poetry --version"
     }],
     ["@semantic-release/git", {
