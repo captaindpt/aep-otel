@@ -1,0 +1,24 @@
+{
+  "packages": {
+    "python": {
+      "component": "aep-otel",
+      "package_type": "python",
+      "path": "python",
+      "versioning": "poetry",
+      "release_type": "python",
+      "bump_minor_pre_major": true,
+      "bump_patch_for_minor_pre_major": true,
+      "changelog_path": "CHANGELOG.md",
+      "changelog_sections": [
+        {"type": "feat", "section": "Features"},
+        {"type": "fix", "section": "Bug Fixes"},
+        {"type": "chore", "section": "Chores"},
+        {"type": "docs", "section": "Documentation"},
+        {"type": "style", "section": "Style"},
+        {"type": "refactor", "section": "Refactoring"},
+        {"type": "perf", "section": "Performance Improvements"},
+        {"type": "test", "section": "Tests"}
+      ]
+    }
+  }
+} 

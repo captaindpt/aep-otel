@@ -1,0 +1,43 @@
+name: Release Please
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write # Allow to update pyproject.toml, CHANGELOG.md
+  pull-requests: write # Allow to create/update Release PR
+
+jobs:
+  release-please:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafb71 # v2.7.0
+        with:
+          egress-policy: audit # TODO: change to 'block' after couple of runs
+
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Run Release Please for Python
+        id: release-python
+        uses: google-github-actions/release-please-action@v4
+        with:
+          # token: ${{ secrets.GITHUB_TOKEN }} # GITHUB_TOKEN is used by default
+          config-file: release-please-config.json
+          manifest-file: .release-please-manifest.json # Default, stores last release version info
+          # The release-please action will only create/update a PR if there are relevant changes.
+          # It will also create a GitHub Release and tag when the Release PR is merged.
+
+      # This output can be used by subsequent jobs, e.g., to trigger a build if a release was proposed
+      # For now, we just print it.
+      - name: Print Release Please outputs (Python)
+        if: steps.release-python.outputs.release_created == 'true' || steps.release-python.outputs.pr
+        run: |
+          echo "Release created for Python: ${{ steps.release-python.outputs.release_created }}"
+          echo "Python PR Number: ${{ steps.release-python.outputs.pr.number }}"
+          echo "Python PR URL: ${{ steps.release-python.outputs.pr.url }}"
+          echo "Python Tag Name: ${{ steps.release-python.outputs.tag_name }}"
+          echo "Python Version: ${{ steps.release-python.outputs.major }}.${{ steps.release-python.outputs.minor }}.${{ steps.release-python.outputs.patch }}" 

@@ -1,0 +1,38 @@
+receivers:
+  otlp:
+    protocols:
+      grpc:
+        endpoint: 0.0.0.0:4317
+      http:
+        endpoint: 0.0.0.0:4318
+
+exporters:
+  logging:
+    loglevel: debug # Options: debug, info, warn, error
+
+  otlp:
+    # Renamed from 'jaeger' to 'otlp' and configured to send to Jaeger's OTLP gRPC port
+    endpoint: jaeger:4317 
+    tls:
+      insecure: true # Jaeger is on the same Docker network, no TLS needed
+    # Optional: specify headers if Jaeger OTLP receiver requires them, usually not for default.
+    # headers:
+    #   key: value 
+
+processors:
+  batch: # Batches spans and metrics before sending to reduce network calls
+
+service:
+  pipelines:
+    traces:
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging, otlp] # Changed 'jaeger' to 'otlp' here as well
+    metrics: # Basic metrics pipeline (can be expanded later)
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging]
+    logs: # Basic logs pipeline (can be expanded later)
+      receivers: [otlp]
+      processors: [batch]
+      exporters: [logging] 

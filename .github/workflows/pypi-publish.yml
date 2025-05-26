@@ -1,0 +1,59 @@
+name: Publish Python Package to PyPI
+
+on:
+  release:
+    types: [published] # Triggered when a GitHub Release is published
+    # We only want to trigger this for releases related to the aep-otel python package.
+    # The release-please action for python will create tags like 'aep-otel@v1.2.3'.
+    # We need to ensure this workflow only runs for those tags.
+    # Unfortunately, GitHub Actions `on.release.tags` doesn't directly support
+    # this for the `published` event type if the tag is created by an action.
+    # We will add a job-level condition to check the tag name.
+
+permissions:
+  contents: read # To checkout the code
+  id-token: write # Needed for trusted publishing to PyPI
+
+jobs:
+  pypi-publish:
+    name: Upload release to PyPI
+    runs-on: ubuntu-latest
+    # Condition to ensure we only run for tags created by release-please for the python package.
+    # release-please for a component named 'aep-otel' will create tags like 'aep-otel@vX.Y.Z'.
+    if: startsWith(github.event.release.tag_name, 'aep-otel@v')
+    environment:
+      name: pypi
+      url: https://pypi.org/p/aep-otel # Link to the PyPI project (needs to exist or be created on first publish)
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@5c7944e73c4c2a096b17a9cb74d65b6c2bbafb71 # v2.7.0
+        with:
+          egress-policy: audit # TODO: change to 'block' after couple of runs
+
+      - name: Checkout code at the release tag
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.release.tag_name }}
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11" # Use a specific Python version for building
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+        with:
+          virtualenvs-create: true
+          virtualenvs-in-project: true
+
+      - name: Build package
+        run: poetry build
+        working-directory: ./python # Ensure commands run in the python package directory
+
+      - name: Publish package to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          # user: __token__ # Not needed with trusted publishing
+          # password: ${{ secrets.PYPI_API_TOKEN }} # Using trusted publishing instead
+          packages_dir: python/dist/ # Path to the built distributions
+          # skip_existing: true # Optional: skip if version already exists on PyPI
