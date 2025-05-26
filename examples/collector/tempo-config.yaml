@@ -1,0 +1,53 @@
+server:
+  http_listen_port: 3200
+  grpc_listen_port: 9095 # Tempo's internal gRPC, not for OTLP
+
+distributor:
+  receivers:
+    otlp:
+      protocols:
+        grpc:
+          endpoint: 0.0.0.0:4317
+        http:
+          endpoint: 0.0.0.0:4318
+
+ingester:
+  trace_idle_period: 10s
+  max_block_bytes: 1_000_000
+  max_block_duration: 5m
+
+compactor:
+  compaction:
+    block_retention: 1h 
+    compacted_block_retention: 10m
+
+storage:
+  trace:
+    backend: local
+    local:
+      path: /tmp/tempo/blocks
+    wal:
+      path: /tmp/tempo/wal # Corrected WAL config
+      # enabled: true # WAL can be enabled if needed, often defaults to disabled or managed internally
+
+# metrics_generator is optional and can be complex.
+# For now, let's comment it out to ensure Tempo starts.
+# We can re-add and correctly configure it later if we need to generate metrics from traces.
+# metrics_generator:
+#   processor:
+#     service_graphs:
+#       wait: 10s # How long to wait for a complete trace before generating service graph data.
+#     span_metrics:
+#       dimensions:
+#         - http.method
+#         - http.status_code
+#       metrics_instance_prefix: "tempo_"
+#       latency_histogram_buckets: [100us, 1ms, 10ms, 100ms, 1s, 10s, 1m]
+#   storage:
+#     path: /tmp/tempo/generator_data
+#     remote_write:
+#       endpoint: http://prometheus:9090/api/v1/write # Example if sending to Prometheus
+#       send_exemplars: true
+
+usage_report:
+  reporting_enabled: false 
