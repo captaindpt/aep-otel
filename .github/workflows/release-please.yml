@@ -23,7 +23,7 @@ jobs:
 
       - name: Run Release Please for Python
         id: release-python
-        uses: googleapis/release-please-action@v4
+        uses: googleapis/release-please-action@v4.1.1
         with:
           # token: ${{ secrets.GITHUB_TOKEN }} # GITHUB_TOKEN is used by default
           config-file: release-please-config.json
