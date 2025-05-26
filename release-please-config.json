@@ -5,7 +5,7 @@
       "release_type": "simple",
       "changelog_path": "CHANGELOG_ROOT.md"
     },
-    "python": {
+    "aep_otel_py_pkg": {
       "component": "aep-otel",
       "path": "python",
       "release_type": "python",
