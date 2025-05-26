@@ -7,6 +7,7 @@
       "bump_minor_pre_major": true,
       "bump_patch_for_minor_pre_major": true,
       "changelog_path": "CHANGELOG.md",
+      "extra_files": ["pyproject.toml"],
       "changelog_sections": [
         {"type": "feat", "section": "Features"},
         {"type": "fix", "section": "Bug Fixes"},
