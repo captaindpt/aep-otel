@@ -1,0 +1,57 @@
+name: Semantic Release
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write # To push new versions and tags
+  issues: write # To create release notes/issues
+  pull-requests: write # To create release PRs (if applicable, not used by default by semantic-release)
+
+jobs:
+  release:
+    name: Semantic Release
+    runs-on: ubuntu-latest
+    if: "!contains(github.event.head_commit.message, '[skip ci]') && !contains(github.event.head_commit.message, '[ci skip]')" # Avoid release loops
+    steps:
+      - name: Harden Runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          # Fetch all history so semantic-release can analyze commits
+          fetch-depth: 0
+          # Need a token with write access to push tags and commit changes
+          token: ${{ secrets.GH_PAT_FOR_SEMANTIC_RELEASE }} # Using a PAT here to trigger subsequent workflows like pypi-publish
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install dependencies
+        run: npm ci # Assuming package-lock.json will be created and committed
+
+      - name: Setup Git User
+        run: |
+          git config user.name "semantic-release-bot"
+          git config user.email "semantic-release-bot@users.noreply.github.com"
+
+      # This step is crucial if semantic-release needs to modify python/pyproject.toml
+      # It will be poetry version ${nextRelease.version}
+      # For now, this step is a placeholder. We need @semantic-release/exec for this.
+      # We are assuming for this first pass that pyproject.toml version is managed manually or by another process for now
+      # and semantic-release primarily handles changelog, git commit/tag, and GitHub release.
+      # - name: Bump Python version (Placeholder)
+      #   run: echo "Poetry version bump would happen here for ${nextRelease.version}"
+
+      - name: Semantic Release
+        env:
+          GITHUB_TOKEN: ${{ secrets.GH_PAT_FOR_SEMANTIC_RELEASE }} # Using a PAT here
+          # NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Not publishing to NPM from here
+        run: npx semantic-release 
