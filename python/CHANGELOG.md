@@ -1,3 +1,10 @@
+## [1.1.2](https://github.com/captaindpt/aep-otel/compare/aep-otel@v1.1.1...aep-otel@v1.1.2) (2025-05-26)
+
+
+### Bug Fixes
+
+* **ci:** correct @semantic-release/exec config for publishCmd ([1ca3d3a](https://github.com/captaindpt/aep-otel/commit/1ca3d3abe5f0c5e5b875091450bb12784e225902))
+
 ## [1.1.1](https://github.com/captaindpt/aep-otel/compare/aep-otel@v1.1.0...aep-otel@v1.1.1) (2025-05-26)
 
 
