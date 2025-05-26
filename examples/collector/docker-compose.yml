@@ -28,6 +28,39 @@ services:
     networks:
       - otel-network
 
+  tempo:
+    image: grafana/tempo:latest
+    container_name: tempo-aep
+    command: ["-config.file=/etc/tempo.yaml"]
+    volumes:
+      - ./tempo-config.yaml:/etc/tempo.yaml # We will create this basic config file
+      - tempo_data:/tmp/tempo
+    ports:
+      - "3200:3200"  # Tempo HTTP (usually for Grafana datasource)
+      # Tempo also listens on 4317 (OTLP gRPC), 4318 (OTLP HTTP) by default, no need to expose if only collector talks to it on internal network
+    networks:
+      - otel-network
+    depends_on:
+      - otel-collector
+
+  grafana:
+    image: grafana/grafana-oss:latest
+    container_name: grafana-aep
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./grafana_provisioning/datasources:/etc/grafana/provisioning/datasources
+      - ./grafana_provisioning/dashboards:/etc/grafana/provisioning/dashboards
+    ports:
+      - "3001:3000"  # Grafana UI now on host port 3001
+    networks:
+      - otel-network
+    depends_on:
+      - tempo
+
 networks:
   otel-network:
-    driver: bridge 
+    driver: bridge
+
+volumes:
+  tempo_data: {}
+  grafana_data: {} 
