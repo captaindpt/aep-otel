@@ -1,3 +1,11 @@
+# [1.1.0](https://github.com/captaindpt/aep-otel/compare/aep-otel@v1.0.0...aep-otel@v1.1.0) (2025-05-26)
+
+
+### Features
+
+* **ci:** integrate poetry version bump into semantic-release ([f513187](https://github.com/captaindpt/aep-otel/commit/f513187cd90e50565c7df2b2d85f0c58d8c6caa1))
+* Trigger first release with semantic-release ([260337e](https://github.com/captaindpt/aep-otel/commit/260337e09e8c5994086b0d33a7ea6c5c78e30fe7))
+
 # 1.0.0 (2025-05-26)
 
 
