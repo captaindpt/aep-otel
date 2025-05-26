@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/captaindpt/aep-otel/compare/aep-otel@v1.1.0...aep-otel@v1.1.1) (2025-05-26)
+
+
+### Bug Fixes
+
+* **ci:** correct @semantic-release/exec config for verifyReleaseCmd ([31d0bc6](https://github.com/captaindpt/aep-otel/commit/31d0bc6d2660ec0f7964642d8047955dfea40871))
+
 # [1.1.0](https://github.com/captaindpt/aep-otel/compare/aep-otel@v1.0.0...aep-otel@v1.1.0) (2025-05-26)
 
 
