@@ -1,3 +1,10 @@
+## [1.1.3](https://github.com/captaindpt/aep-otel/compare/aep-otel@v1.1.2...aep-otel@v1.1.3) (2025-05-26)
+
+
+### Bug Fixes
+
+* **collector:** change grafana host port to 3001 to avoid conflict ([e1c1c67](https://github.com/captaindpt/aep-otel/commit/e1c1c677202f68705f6f731fb0c7656d6e51c30f))
+
 ## [1.1.2](https://github.com/captaindpt/aep-otel/compare/aep-otel@v1.1.1...aep-otel@v1.1.2) (2025-05-26)
 
 
